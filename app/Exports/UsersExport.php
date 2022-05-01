@@ -6,9 +6,9 @@ use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithProperties;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class UsersExport implements FromQuery,  WithProperties
+class UsersExport implements FromQuery, WithHeadings
 {
     use Exportable;
 
@@ -22,11 +22,13 @@ class UsersExport implements FromQuery,  WithProperties
     {
         return User::query()->select('id', 'name', 'birthdate')->where('birthdate','>=', $this->start)->where('birthdate','<=', $this->end);
     }
-    public function properties(): array
+
+    public function headings(): array
     {
         return [
-            'name' => 'Users',
-            'birthdate' => 'Birthdate',
+            'ID',
+            'Name',
+            'Birthdate',
         ];
     }
 
