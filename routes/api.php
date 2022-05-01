@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/generate-report',[ReportController::class, 'generateReport'] );
+Route::get('/get-report/{id}', [ReportController::class, 'getReportId']);
+Route::get('/list-reports', [ReportController::class, 'getReports']);
